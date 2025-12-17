@@ -1,0 +1,86 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-container {
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+.menu-title {
+    color: green;
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-button {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border: 2px solid white;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-button:hover {
+    background-color: white;
+    color: green;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .menu-title {
+        font-size: 2.5em;
+    }
+    .menu-button {
+        font-size: 1.3em;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    .menu-title {
+        font-size: 2em;
+    }
+    .menu-buttons {
+        gap: 15px;
+    }
+    .menu-button {
+        font-size: 1.2em;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-title {
+        font-size: 1.8em;
+    }
+    .menu-buttons {
+        gap: 10px;
+    }
+    .menu-button {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+}

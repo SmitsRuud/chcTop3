@@ -12,5 +12,27 @@
         <p style="color:white;">Content for Stem op jouw top 3 will go here.</p>
         <a href="index.html" class="menu-button">Terug naar menu</a>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyC5Mqxi1qLYvjq2QghqjcCAaT4ZYccWI04",
+          authDomain: "chctop3-524d2.firebaseapp.com",
+          projectId: "chctop3-524d2",
+          storageBucket: "chctop3-524d2.firebasestorage.app",
+          messagingSenderId: "894150333116",
+          appId: "1:894150333116:web:6f23b536317d15ff85b6b9",
+          measurementId: "G-6M6GHHVCTN"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
 </body>
 </html>

@@ -33,6 +33,16 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+
+        
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        if (window.location.pathname.includes("stem-op-jouw-top-3.html")) {
+          window.location.href = "index.html";
+        }
+      }
+    });
+
     </script>
 </body>
 </html>

@@ -31,6 +31,23 @@
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 <body>
+    
+    <div class="login-container">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <button id="loginButton">Login</button>
+      <p id="loginError"></p>
+    </div>
+
+    <div class="signup-container">
+      <h2>Register</h2>
+      <input type="email" id="signupEmail" placeholder="Email">
+      <input type="password" id="signupPassword" placeholder="Password">
+      <button id="signupButton">Create Account</button>
+      <p id="signupError"></p>
+    </div>
+
     <div class="menu-container">
         <h1 class="menu-title">CHC Top 3</h1>
         <div class="menu-buttons">

@@ -11,9 +11,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
+  apiKey: "AIzaSyC5Mqxi1qLYvjq2QghqjcCAaT4ZYccWI04",
+  authDomain: "chctop3-524d2.firebaseapp.com",
+  projectId: "chctop3-524d2",
+
 };
 
 export const app = initializeApp(firebaseConfig);

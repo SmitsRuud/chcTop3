@@ -9,8 +9,16 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+// Import database functions
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 1) Paste your real config here (from Firebase Console > Project settings > General > Your apps)
+// 1) Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyC5Mqxi1qLYvjq2QghqjcCAaT4ZYccWI04",
   authDomain: "chctop3-524d2.firebaseapp.com",
@@ -20,6 +28,9 @@ const firebaseConfig = {
 // 2) Initialize only once (prevents duplicate-initialization errors when used on many pages)
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+//enable database functions
+export const db = getFirestore(app);
 
 // Keep users logged in across reloads (non-blocking; safe if it fails)
 setPersistence(auth, browserLocalPersistence).catch(() => { /* ignore */ });

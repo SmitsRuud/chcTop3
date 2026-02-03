@@ -28,39 +28,54 @@ body {
     gap: 20px;
 }
 
-/* Login status container (top-right subtle bar) */
-.login-status {
+/* ===== Login status (top-right, subtle) ===== */
+#loginStatus.login-status {
   position: fixed;
-  top: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.6);  /* subtle transparent */
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  /* Subtle glass effect pill */
+  background: rgba(0, 0, 0, 0.55);
   color: #fff;
   padding: 6px 12px;
-  border-radius: 20px;
+  border-radius: 999px;
   font-size: 0.8rem;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  z-index: 9999;
-  backdrop-filter: blur(4px);   /* soft blur effect */
+  line-height: 1;
+  backdrop-filter: blur(4px);
 }
 
-/* Logout button, subtle pill-style */
+.login-status__label {
+  opacity: 0.95;
+}
+
+.login-status__link {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.95;
+}
+
+.login-status__link:hover {
+  text-decoration: underline;
+}
+
 .logout-btn {
-  background: #e63946;         /* warm red tone */
+  background: #e63946;        /* subtle red pill */
   border: none;
-  color: white;
+  color: #fff;
   padding: 3px 10px;
-  border-radius: 12px;
+  border-radius: 999px;
   font-size: 0.75rem;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .logout-btn:hover {
-  background: #b92c36;
+  background: #c92e3a;
 }
-
 
 .menu-button {
     text-decoration: none;
@@ -79,6 +94,14 @@ body {
     color: green;
 }
 
+/* Optional: handle very small screens */
+@media (max-width: 420px) {
+  #loginStatus.login-status {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+    
+}
 /* Responsive Design */
 @media (max-width: 1024px) {
     .menu-title {

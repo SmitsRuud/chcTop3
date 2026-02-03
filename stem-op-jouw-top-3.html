@@ -10,15 +10,116 @@
     <div id="loginStatus" class="login-status"></div>
     <div class="menu-container">
         <h1 class="menu-title">Stem op jouw top 3</h1>
-        <p style="color:white;">Content for Stem op jouw top 3 will go here.</p>
+                <form id="voteForm">
+          <label>1e plaats:
+            <select id="vote1" required>
+              <option value="">Kies speler…</option>
+              <option>Speler A</option>
+              <option>Speler B</option>
+              <option>Speler C</option>
+            </select>
+          </label>
+        
+          <label>2e plaats:
+            <select id="vote2" required>
+              <option value="">Kies speler…</option>
+              <option>Speler A</option>
+              <option>Speler B</option>
+              <option>Speler C</option>
+            </select>
+          </label>
+        
+          <label>3e plaats:
+            <select id="vote3" required>
+              <option value="">Kies speler…</option>
+              <option>Speler A</option>
+              <option>Speler B</option>
+              <option>Speler C</option>
+            </select>
+          </label>
+                    
+          <label>Zaag:
+            <select id="vote3" required>
+              <option value="">Kies speler…</option>
+              <option>Speler A</option>
+              <option>Speler B</option>
+              <option>Speler C</option>
+            </select>
+          </label>
+          <button type="submit">Stem indienen</button>
+          <p id="voteMessage"></p>
+        </form>
         <a href="index.html" class="menu-button">Terug naar menu</a>
     </div>
     <div id="loginStatus" class="login-status"></div>
+
     
     <script type="module">
+    //Login status button, including required authenticated logic.
       import { initLoginStatus, requireAuth } from "./firebase-setup.js";
       initLoginStatus();
       requireAuth("inloggen.html"); // redirect to login if not authenticated
     </script>
+
+    <script type="module">
+    // Logic for sharing data with the database
+      import { auth, db, initLoginStatus, requireAuth } from "./firebase-setup.js";
+      import { 
+        collection, 
+        doc, 
+        setDoc, 
+        serverTimestamp 
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    
+      // Require login
+      initLoginStatus();
+      requireAuth();
+    
+      // Elements
+      const form = document.getElementById("voteForm");
+      const msg = document.getElementById("voteMessage");
+    
+      // Compute week number (ISO standard)
+      function getCurrentWeek() {
+        const now = new Date();
+        const firstThursday = new Date(now.getFullYear(), 0, 1);
+        const dayOfWeek = (firstThursday.getDay() + 6) % 7; 
+        firstThursday.setDate(firstThursday.getDate() - dayOfWeek + 3);
+        const weekNumber = 
+            Math.floor((now - firstThursday) / (7 * 24 * 60 * 60 * 1000)) + 1;
+        return `${now.getFullYear()}-W${String(weekNumber).padStart(2, "0")}`;
+      }
+    
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+    
+        const user = auth.currentUser;
+        if (!user) return;
+    
+        const week = getCurrentWeek();
+        const votesRef = doc(collection(db, "votes"), `${user.uid}_${week}`);
+    
+        try {
+          await setDoc(votesRef, {
+            userId: user.uid,
+            week: week,
+            first: document.getElementById("vote1").value,
+            second: document.getElementById("vote2").value,
+            third: document.getElementById("vote3").value,
+            timestamp: serverTimestamp()
+          });
+    
+          msg.textContent = "Jouw stem is opgeslagen!";
+          msg.style.color = "green";
+    
+        } catch (error) {
+          msg.textContent = "Er ging iets mis: " + error.message;
+          msg.style.color = "red";
+        }
+      });
+    </script>
+
+
+    
 </body>
 </html>

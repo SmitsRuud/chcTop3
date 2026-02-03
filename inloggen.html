@@ -50,6 +50,91 @@
       initLoginStatus();
     </script>
 
+
+--------------
+    <!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inloggen – CHC Top 3</title>
+
+  <!-- Your site stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Subtle status pill (top-right). Present on every page. -->
+  <div id="loginStatus" class="login-status"></div>
+
+  <!-- Your page content -->
+  <main class="page page--login" style="max-width:600px; margin:80px auto 40px; padding:0 16px;">
+    <h1 style="margin-bottom:8px;">Inloggen</h1>
+    <p style="margin-top:0; color:#555;">Log in om jouw top 3 te kunnen stemmen.</p>
+
+    <form id="loginForm" style="display:grid; gap:12px; margin-top:16px;">
+      <label>
+        <span>E‑mail</span>
+        <input id="loginEmail" name="email" type="email" autocomplete="username"
+               required placeholder="jij@voorbeeld.nl" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;">
+      </label>
+
+      <label>
+        <span>Wachtwoord</span>
+        <input id="loginPassword" name="password" type="password" autocomplete="current-password"
+               required placeholder="••••••••" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;">
+      </label>
+
+      <button id="loginButton" type="submit" style="padding:10px 14px; border-radius:6px; border:none; background:#1b5e20; color:#fff; cursor:pointer;">
+        Inloggen
+      </button>
+
+      <p id="loginError" role="alert" style="min-height:1.2em; color:#b00020; margin:0;"></p>
+    </form>
+  </main>
+
+  <!-- Firebase & page logic -->
+  <script type="module">
+    // 1) Initialize status pill on every page
+    import { auth, initLoginStatus } from "./firebase-setup.js";
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    initLoginStatus();
+
+    // 2) Handle login
+    const form   = document.getElementById("loginForm");
+    const email  = document.getElementById("loginEmail");
+    const pass   = document.getElementById("loginPassword");
+    const button = document.getElementById("loginButton");
+    const errorP = document.getElementById("loginError");
+
+    const ERRORS_NL = {
+      "auth/invalid-credential": "Combinatie van e‑mail en wachtwoord klopt niet.",
+      "auth/user-disabled": "Dit account is geblokkeerd.",
+      "auth/user-not-found": "Gebruiker niet gevonden.",
+      "auth/wrong-password": "Onjuist wachtwoord.",
+      "auth/too-many-requests": "Te veel pogingen. Probeer het later opnieuw.",
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorP.textContent = "";
+      button.disabled = true; button.textContent = "Bezig…";
+
+      try {
+        await signInWithEmailAndPassword(auth, email.value.trim(), pass.value);
+        // Redirect to the voting page after successful login
+        window.location.href = "stem-op-jouw-top-3.html";
+      } catch (err) {
+        const code = err?.code || "";
+        errorP.textContent = ERRORS_NL[code] || ("Inloggen mislukt: " + (err?.message || "onbekende fout"));
+      } finally {
+        button.disabled = false; button.textContent = "Inloggen";
+      }
+    });
+  </script>
+</body>
+</html>
     
 
 </body>

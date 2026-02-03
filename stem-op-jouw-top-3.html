@@ -14,11 +14,11 @@
         <a href="index.html" class="menu-button">Terug naar menu</a>
     </div>
     <div id="loginStatus" class="login-status"></div>
-
-    <script type="module">
-      import { auth, initLoginStatus } from "./firebase-setup.js";
     
+    <script type="module">
+      import { initLoginStatus, requireAuth } from "./firebase-setup.js";
       initLoginStatus();
+      requireAuth("inloggen.html"); // redirect to login if not authenticated
     </script>
 </body>
 </html>

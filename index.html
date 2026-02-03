@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    <div id="loginStatus" class="login-status"></div>
     <div class="menu-container">
         <h1 class="menu-title">CHC Top 3</h1>
         <div class="menu-buttons">
@@ -18,5 +18,10 @@
             <a href="inloggen.html" class="menu-button">inloggen</a>
         </div>
     </div>
+    <script type="module">
+      import { auth, initLoginStatus } from "./firebase-setup.js";
+    
+      initLoginStatus();
+    </script>
 </body>
 </html>

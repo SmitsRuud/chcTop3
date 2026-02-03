@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inloggen – CHC Top 3</title>
 
-  <!-- Your site stylesheet -->
+  <!-- Site stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,8 +13,9 @@
   <!-- Subtle status pill (top-right). Present on every page. -->
   <div id="loginStatus" class="login-status"></div>
 
-  <!-- Your page content -->
+  <!-- Page content -->
   <main class="page page--login" style="max-width:600px; margin:80px auto 40px; padding:0 16px;">
+    
     <h1 style="margin-bottom:8px;">Inloggen</h1>
     <p style="margin-top:0; color:#555;">Log in om jouw top 3 te kunnen stemmen.</p>
 
@@ -34,7 +35,9 @@
       <button id="loginButton" type="submit" style="padding:10px 14px; border-radius:6px; border:none; background:#1b5e20; color:#fff; cursor:pointer;">
         Inloggen
       </button>
-
+      <div class="menu-container">
+          <a href="index.html" class="menu-button">Terug naar menu</a>
+      </div>
       <p id="loginError" role="alert" style="min-height:1.2em; color:#b00020; margin:0;"></p>
     </form>
   </main>
